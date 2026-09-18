@@ -1,0 +1,37 @@
+```yaml
+name: FFmpeg 9.0.1 Configure Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  configure:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSYS2 UCRT64
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            base-devel
+            wget
+            tar
+            nasm
+            mingw-w64-ucrt-x86_64-toolchain
+            mingw-w64-ucrt-x86_64-pkgconf
+            mingw-w64-ucrt-x86_64-lame
+            mingw-w64-ucrt-x86_64-opus
+            mingw-w64-ucrt-x86_64-libvorbis
+            mingw-w64-ucrt-x86_64-libiconv
+
+      - name: Run FFmpeg configure
+        shell: msys2 {0}
+        run: |
+          chmod +x ./configure.sh
+          ./configure.sh
+```
