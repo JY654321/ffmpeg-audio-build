@@ -32,3 +32,9 @@ jobs:
         run: |
           chmod +x ./configure.sh
           ./configure.sh
+
+      - name: Upload ffmpeg.exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-static
+          path: ffmpeg-9.0.1/output/ffmpeg.exe
