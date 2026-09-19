@@ -44,8 +44,7 @@ for lib in \
     libopus.a \
     libvorbis.a \
     libvorbisenc.a \
-    libogg.a \
-    libiconv.a
+    libogg.a
 do
     if [[ ! -f "/ucrt64/lib/${lib}" ]]; then
         echo "❌ 缺失: /ucrt64/lib/${lib}"
@@ -66,7 +65,7 @@ echo "✅ 静态外部库齐全"
 echo
 echo ">>> 检查 pkg-config..."
 
-for pc in lame opus vorbis vorbisenc ogg iconv; do
+for pc in lame opus vorbis vorbisenc ogg; do
     if pkg-config --exists "${pc}"; then
         echo "✅ ${pc}.pc"
     else
