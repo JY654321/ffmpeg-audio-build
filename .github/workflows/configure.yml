@@ -26,7 +26,6 @@ jobs:
             mingw-w64-ucrt-x86_64-lame
             mingw-w64-ucrt-x86_64-opus
             mingw-w64-ucrt-x86_64-libvorbis
-            mingw-w64-ucrt-x86_64-libiconv
 
       - name: Run FFmpeg configure
         shell: msys2 {0}
