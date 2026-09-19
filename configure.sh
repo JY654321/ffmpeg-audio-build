@@ -55,7 +55,7 @@ done
 
 if [[ "${missing}" -ne 0 ]]; then
     echo
-    echo "❌ 静态外部库不完整"
+echo "ERROR: static external libs incomplete"
     exit 1
 fi
 
@@ -235,4 +235,28 @@ echo
 echo "完整检测日志:"
 echo "  ffbuild/config.log"
 echo
-echo "本轮没有执行 make。"
+echo "========================================"
+echo ">>> start compile"
+echo "========================================"
+echo
+
+make -j"$(nproc)"
+
+echo
+echo "========================================"
+echo "✅ 编译完成"
+echo "========================================"
+echo
+
+echo ">>> 收集产物..."
+mkdir -p output
+cp ffmpeg.exe output/ 2>/dev/null || true
+cp ffprobe.exe output/ 2>/dev/null || true
+ls -lh output/
+
+echo
+echo ">>> 验证 DLL 依赖..."
+objdump -p ffmpeg.exe | grep "DLL Name" || true
+
+echo
+echo ">>> all done"
